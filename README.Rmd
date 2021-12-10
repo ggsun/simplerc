@@ -18,20 +18,49 @@ Title <- "Title of your paper goes here"
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh///master?urlpath=rstudio)
 
-This repository contains the data and code for our paper:
-
-> Authors, (YYYY). _`r Title`_. Name of journal/book <https://doi.org/xxx/xxx>
-
-Our pre-print is online here:
-
-> Authors, (YYYY). _`r Title`_. Name of journal/book, Accessed `r format(Sys.Date(), "%d %b %Y")`. Online at <https://doi.org/xxx/xxx>
-
+Random walks are stochastic models that describe a path through a mathematical space that consists of random, discrete steps. This compendium contains simple functions that can be used to simulate, plot, or fit one-dimensional random walks.
 
 ### How to cite
 
 Please cite this compendium as:
 
-> Authors, (`r format(Sys.Date(), "%Y")`). _Compendium of R code and data for `r Title`_. Accessed `r format(Sys.Date(), "%d %b %Y")`. Online at <https://doi.org/xxx/xxx>
+> Randomwalk Enthusiast, (`r format(Sys.Date(), "%Y")`). _Introduction to random walks_. Accessed `r format(Sys.Date(), "%d %b %Y")`. Online at <https://doi.org/xxx/xxx>
+
+## How to install
+
+This research compendium has been developed using the statistical programming
+language R. To work with the compendium, you will need
+installed on your computer the [R software](https://cloud.r-project.org/)
+itself and optionally [RStudio Desktop](https://rstudio.com/products/rstudio/download/).
+
+You can download the compendium as a zip from from this URL:
+[simplerc](https://github.com/ggsun/simplerc). After unzipping:
+- open the `.Rproj` file in RStudio
+- run `devtools::install()` to ensure you have the packages this analysis depends on (also listed in the
+[DESCRIPTION](/DESCRIPTION) file).
+
+## How to use
+
+The `simulate_walk()` function takes as arguments the number of steps `t`, and the mean (`mu`) and standard deviation (`sigma`) of the normal distribution that each step size is drawn from, and returns a series of values that represent a random walk in a one-dimensional space. Example code is shown below:
+```
+t <- 100
+mu <- 0.5
+sigma <- 2
+
+walk <- simulate_walk(t, mu, sigma)
+```
+
+The `plot_walk()` function can be used to plot a simulated walk:
+```
+plot_walk(walk)
+```
+
+![alt text](sample_walk.png)
+
+The `fit_walk()` function takes a simulated walk as an argument, and estimates the parameters (`mu` and `sigma`) of the normal distributions that were used to simulate the random walk.
+```
+params <- fit_walk(walk)
+```
 
 ## Contents
 
@@ -49,20 +78,6 @@ The **analysis** directory contains:
     supplementary-materials](/analysis/supplementary-materials):
     Supplementary materials including notes and other documents
     prepared and collected during the analysis.
-
-## How to run in your broswer or download and run locally
-
-This research compendium has been developed using the statistical programming
-language R. To work with the compendium, you will need
-installed on your computer the [R software](https://cloud.r-project.org/)
-itself and optionally [RStudio Desktop](https://rstudio.com/products/rstudio/download/).
-
-You can download the compendium as a zip from from this URL:
-[master.zip](/archive/master.zip). After unzipping:
-- open the `.Rproj` file in RStudio
-- run `devtools::install()` to ensure you have the packages this analysis depends on (also listed in the
-[DESCRIPTION](/DESCRIPTION) file).
-- finally, open `analysis/paper/paper.Rmd` and knit to produce the `paper.docx`, or run `rmarkdown::render("analysis/paper/paper.Rmd")` in the R console
 
 ### Licenses
 
